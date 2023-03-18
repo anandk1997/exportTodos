@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 import TodoComponent from "../Components/TodoComponent";
@@ -119,13 +119,10 @@ function Todo() {
           ) : null)}
       </div>
 
-
-      {
-        todos.length > 0 || completedTodos.length >0 ?
-      <div className="d-flex justify-content-center mt-4">
-        <div className="todos p-2">
-          {todos?.map((todo, i) => (
-            <Fragment key={i}>
+      {todos.length > 0 || completedTodos.length > 0 ? (
+        <div className="d-flex justify-content-center mt-4">
+          <div className="todos p-2">
+            {todos?.map((todo, i) => (
               <TodoComponent
                 DeleteTodo={handleDeleteTodo}
                 Update={handleUpdateTodo}
@@ -137,13 +134,11 @@ function Todo() {
                 todos={todos}
                 handleCompleteTodo={handleCompleteTodo}
               />
-            </Fragment>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="todos p-2">
-          {completedTodos?.map((todo, i) => (
-            <Fragment key={i}>
+          <div className="todos p-2">
+            {completedTodos?.map((todo, i) => (
               <TodoComponent
                 DeleteTodo={handleDeleteTodo1}
                 Update={handleUpdateTodo1}
@@ -154,12 +149,17 @@ function Todo() {
                 todos={completedTodos}
                 handleCompleteTodo={handleIncompleteTodo}
               />
-            </Fragment>
-          ))}
+            ))}
+          </div>
         </div>
-      </div> : <h1 className="d-flex align-items-center justify-content-center" style={{height:"70vh"}}>No Todos Found</h1>
-      }
-
+      ) : (
+        <h1
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: "70vh" }}
+        >
+          No Todos Found
+        </h1>
+      )}
     </div>
   );
 }
