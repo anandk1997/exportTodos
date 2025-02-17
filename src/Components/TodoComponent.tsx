@@ -1,7 +1,18 @@
 import React, { useReducer, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 
-const TodoComponent = ({
+interface TodoComponentProps {
+  todo: string;
+  i: number;
+  handleCompleteTodo: (index: number) => void;
+  border: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+  DeleteTodo: (index: number) => void;
+  Update: (index: number, newTodo: string) => void;
+  Status: "Incomplete" | "Complete";
+  incomplete: boolean;
+}
+
+const TodoComponent: React.FC<TodoComponentProps> = ({
   todo,
   i,
   handleCompleteTodo,
@@ -11,13 +22,13 @@ const TodoComponent = ({
   Status,
   incomplete,
 }) => {
-  const [newTodo, setNewTodo] = useState(todo);
-  const [edit, setEdit] = useReducer((show) => !show, false);
+  const [newTodo, setNewTodo] = useState<string>(todo);
+  const [edit, setEdit] = useReducer((show: boolean) => !show, false);
 
   const btnStyle = { margin: "auto", width: "100%" };
   const btnClass = "d-flex justify-content-center mt-2";
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     Update(i, newTodo);
     setEdit();
   };
